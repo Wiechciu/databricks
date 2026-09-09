@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://5e8hviqyy3qk"]
+
+[ext_resource type="Script" uid="uid://cxhtpn6auwige" path="res://addons/databricks/databricks.gd" id="1_q1114"]
+[ext_resource type="Texture2D" uid="uid://vifrv66m3jv6" path="res://addons/databricks/art/hide.png" id="2_08ls7"]
+[ext_resource type="Texture2D" uid="uid://du1b77o5g2nw2" path="res://addons/databricks/art/show.png" id="3_2m66e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q1114"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[node name="Databricks" type="PanelContainer" unique_id=1275267449 node_paths=PackedStringArray("api_key", "show_api_key", "sql_statement", "result", "run", "stop", "status", "deployment_name", "warehouse_id")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1114")
+api_key = NodePath("GridContainer/HBoxContainer/APIKey")
+show_api_key = NodePath("GridContainer/HBoxContainer/ShowAPIKey")
+sql_statement = NodePath("GridContainer/SqlStatement")
+result = NodePath("GridContainer/Result")
+run = NodePath("GridContainer/Run")
+stop = NodePath("GridContainer/Stop")
+status = NodePath("GridContainer/Status")
+deployment_name = NodePath("GridContainer/DeploymentName")
+warehouse_id = NodePath("GridContainer/WarehouseId")
+hide_icon = ExtResource("2_08ls7")
+show_icon = ExtResource("3_2m66e")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1960912141]
+layout_mode = 2
+columns = 2
+
+[node name="ApiLabel" type="Label" parent="GridContainer" unique_id=1470764151]
+layout_mode = 2
+text = "API key:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer" unique_id=1194969573]
+layout_mode = 2
+
+[node name="ShowAPIKey" type="Button" parent="GridContainer/HBoxContainer" unique_id=803615575]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+icon = ExtResource("3_2m66e")
+expand_icon = true
+
+[node name="APIKey" type="LineEdit" parent="GridContainer/HBoxContainer" unique_id=1503450122]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Personal Access Token"
+placeholder_text = "api key"
+secret = true
+
+[node name="DeploymentNameLabel" type="Label" parent="GridContainer" unique_id=63987744]
+layout_mode = 2
+text = "Deployment name:"
+
+[node name="DeploymentName" type="LineEdit" parent="GridContainer" unique_id=686474790]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Can be found in the URL: https://<deployment_name>.cloud.databricks.com"
+placeholder_text = "deployment name"
+
+[node name="WarehouseIdLabel" type="Label" parent="GridContainer" unique_id=230659501]
+layout_mode = 2
+text = "Warehouse ID:"
+
+[node name="WarehouseId" type="LineEdit" parent="GridContainer" unique_id=1800869324]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Can be found in SQL Warehouses -> Warehouse details -> Connection details -> HTTP path -> /sql/1.0/warehouses/<warehouse_id>"
+placeholder_text = "warehouse id"
+
+[node name="SqlStatementLabel" type="Label" parent="GridContainer" unique_id=221251765]
+layout_mode = 2
+text = "SQL Statement:"
+
+[node name="SqlStatement" type="TextEdit" parent="GridContainer" unique_id=933478314]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SELECT * FROM RANGE(100)"
+placeholder_text = "sql statement"
+wrap_mode = 1
+
+[node name="ResultLabel" type="Label" parent="GridContainer" unique_id=2002469453]
+layout_mode = 2
+text = "Result:"
+
+[node name="Result" type="Tree" parent="GridContainer" unique_id=1591575826]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+column_titles_visible = true
+hide_root = true
+
+[node name="Run" type="Button" parent="GridContainer" unique_id=1378479899]
+layout_mode = 2
+text = "Run"
+
+[node name="Stop" type="Button" parent="GridContainer" unique_id=1190330827]
+visible = false
+layout_mode = 2
+text = "Stop"
+
+[node name="Status" type="RichTextLabel" parent="GridContainer" unique_id=375830196]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q1114")
+bbcode_enabled = true
+text = "[color=90ee90ff]Ready[/color]"
+vertical_alignment = 1
